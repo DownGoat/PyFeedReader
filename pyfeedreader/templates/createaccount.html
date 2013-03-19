@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Create Account</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../static/style/style.css">
+</head>
+<body>
+    <div id="centercontainer">
+        <h1>Create an Account</h1>
+    </div>
+    <div id="container">
+        {% from "_formhelpers.html" import render_field %}
+        <form class="login" action="/createaccount" method="post">
+            {{ render_field(form.username) }}
+            {{ render_field(form.email) }}
+            {{ render_field(form.emailc) }}
+            {{ render_field(form.password) }}
+            {{ render_field(form.passwc) }}
+            <p><input type="submit" name="submit" value="Create Account" class="registerb"/></p>
+            <a href="/forgotpassword">Forgot your password?</a>
+        </form>
+    </div>
+</body>
+</html>
+
