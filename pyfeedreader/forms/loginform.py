@@ -18,6 +18,14 @@ class LoginForm(Form):
     remember_me = BooleanField("Remember me", default=True)
 
     def valid_login(self, form, username, password):
+        """
+        Validates the login form by checking that username and password match what is in the DB.
+
+        :param form: Not used
+        :param username:
+        :param password:
+        :return: Returns False if the login details are not correct, returns True otherwise.
+        """
         user = User.query.filter(User.username == username).first()
         if not user:
             return False

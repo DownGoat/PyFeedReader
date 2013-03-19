@@ -5,6 +5,8 @@ from datetime import date
 
 version = "0.01"
 
+#Config for FeedServer database, this is so it can support using multiple databases. If you are only using one use
+#same configuration for both DB configs.
 feedserver_db = {
     "db_user": "root",
     "db_pass": "123qwe",

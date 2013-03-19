@@ -1,16 +1,15 @@
-from pyfeedreader.forms.loginform import LoginForm
-
 __author__ = 'sis13'
+
 from flask import *
 import bcrypt
 import random
 import time
+
+from pyfeedreader.forms.loginform import LoginForm
 from pyfeedreader import app
 from pyfeedreader.database import db_session
 from pyfeedreader.models.user import User
-from flask.ext.login import (LoginManager, current_user, login_required,
-                             login_user, logout_user, UserMixin, AnonymousUser,
-                             confirm_login, fresh_login_required)
+from flask.ext.login import *
 
 
 mod = Blueprint('login', __name__)

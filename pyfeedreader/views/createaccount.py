@@ -9,9 +9,7 @@ import time
 from pyfeedreader import app
 from pyfeedreader.database import db_session
 from pyfeedreader.models.user import User
-from flask.ext.login import (LoginManager, current_user, login_required,
-                             login_user, logout_user, UserMixin, AnonymousUser,
-                             confirm_login, fresh_login_required)
+from flask.ext.login import *
 
 
 mod = Blueprint('createaccount', __name__)
@@ -41,6 +39,7 @@ def create_account():
     db_session.add(user)
     db_session.commit()
 
+    #Login the user.
     login_user(user)
 
     return redirect("/")

@@ -2,9 +2,7 @@ __author__ = 'sis13'
 
 from flask import *
 from pyfeedreader.models.user import User
-from flask.ext.login import (LoginManager, current_user, login_required,
-                             login_user, logout_user, UserMixin, AnonymousUser,
-                             confirm_login, fresh_login_required)
+from flask.ext.login import *
 
 
 class Anonymous(AnonymousUser):
@@ -43,7 +41,7 @@ def before_request():
 from pyfeedreader.database import db_session, fs_db_session
 from pyfeedreader.views import createaccount, login, mainpage
 
-
+#Register blueprints
 app.register_blueprint(createaccount.mod)
 app.register_blueprint(login.mod)
 app.register_blueprint(mainpage.mod)
