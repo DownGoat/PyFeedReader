@@ -3,6 +3,7 @@ __author__ = 'sis13'
 from flask import *
 from pyfeedreader.models.user import User
 from flask.ext.login import *
+from pyfeedreader.config import config
 
 
 class Anonymous(AnonymousUser):
