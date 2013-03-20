@@ -35,6 +35,7 @@ def login():
 
     return redirect("/")
 
+#Cant't justify creating a file for just logging out when it is this short.
 @app.route("/logout")
 @login_required
 def logout():

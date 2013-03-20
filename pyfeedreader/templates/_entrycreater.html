@@ -1,9 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{% macro render_entry(entry) %}
+    {% if entry.unread %}
+        <div class="unread entry">
+    {% else %}
+        <div class="read entry">
+    {% endif %}
 
-</body>
-</html>
+    <h3>{{ entry.title }}</h3>
+
+    <p>{{ entry.content }}</p>
+    <div class="sharebar">
+        <ul class="sharelist">
+            <li><img class="shareimg" src="/static/images/f_logo.png" /></li>
+            <li><img class="shareimg" src="/static/images/gplus.png" /></li>
+            <li><img class="shareimg" src="/static/images/twitter.png" /></li>
+        </ul>
+    </div>
+
+    </div>
+{% endmacro %}

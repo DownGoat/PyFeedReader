@@ -1,4 +1,14 @@
-{% macro render_feed(entry) %}
-    {% if entry.new %}
-
+{% macro render_dir(dir) %}
+    <div class="dir">
+    <p>{{ dir.title }}</p>
+    <ul class="feeds">
+        {% for feed in dir.feeds %}
+            {% if feed.new %}
+                <li class="new">{{ feed.title }} ({{ feed.new_entries }})</li>
+            {% else %}
+                <li>{{ feed.title }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    </div>
 {% endmacro %}

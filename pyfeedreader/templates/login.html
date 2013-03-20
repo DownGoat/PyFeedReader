@@ -6,21 +6,29 @@
     <link rel="stylesheet" href="../static/style/style.css">
 </head>
 <body>
-<div id="centercontainer">
-<h1>Login</h1>
-<p>Are you new here? If so you will need to create an account before login in. <a href="/createaccount">Create Account</a></p>
-</div>
-<div id="container">
-    {% from "_formhelpers.html" import render_field %}
-    <form class="login" action="/login" method="post">
-        {{ render_field(form.username) }}
-        {{ render_field(form.password) }}
-        {{ render_field(form.remember_me) }}
 
-        <p><input type="submit" name="submit" value="Login" class="registerb"/></p>
-        <a href="/forgotpassword">Forgot your password?</a>
-    </form>
+<div id="banner">
+<p>Small banner here...</p>
 </div>
+<div id="welcome">
+<p>Happy Welcome message. <a href="/createaccount">Create Account</a></p>
+</div>
+<div id="logincontainer">
+    <div class="centercontainer"><h1>Login</h1></div>
+    <div id="container">
+
+        {% from "_formhelpers.html" import render_field %}
+        <form class="login" action="/login" method="post">
+            {{ render_field(form.username) }}
+            {{ render_field(form.password) }}
+            {{ render_field(form.remember_me) }}
+
+            <p><input type="submit" name="submit" value="Login" class="registerb"/></p>
+            <a href="/forgotpassword">Forgot your password?</a>
+        </form>
+    </div>
+</div>
+
 </body>
 </html>
 
