@@ -14,6 +14,9 @@ py-bcrypt 0.3
 
 SQLAlchemy
     http://www.sqlalchemy.org/
+    
+Flask-WTF 0.8.3
+    https://pypi.python.org/pypi/Flask-WTF
 
 
 Screenshots
