@@ -5,9 +5,9 @@
         <div class="read entry">
     {% endif %}
 
-    <h3>{{ entry.title }}</h3>
+    <a href="{{ entry.link }}"><h3>{{ entry.title }}</h3></a>
 
-    <p>{{ entry.content }}</p>
+    <p>{{ entry.content|safe }}</p>
     <div class="sharebar">
         <ul class="sharelist">
             <li><img class="shareimg" src="/static/images/f_logo.png" /></li>

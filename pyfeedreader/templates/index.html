@@ -23,13 +23,13 @@
     {% endfor %}
 </div>
 <div id="contentcolumn">
+
     {% from "_entrycreater.html" import render_entry %}
     {% for entry in entries %}
         {{ render_entry(entry) }}
     {% endfor %}
 
 
-</div>
 </div>
 </body>
 </html>

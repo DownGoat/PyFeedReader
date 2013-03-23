@@ -1,6 +1,6 @@
 {% macro render_dir(dir) %}
     <div class="dir">
-    <p>{{ dir.title }}</p>
+    <p>{{ dir.name }}</p>
     <ul class="feeds">
         {% for feed in dir.feeds %}
             {% if feed.new %}
