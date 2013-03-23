@@ -1,8 +1,16 @@
-{% macro render_entry(entry) %}
-    {% if entry.unread %}
-        <div class="unread entry">
+{% macro render_entry(entry, index) %}
+    {% if index == 0 %}
+        {% if entry.unread %}
+            <div class="entry unread" id="active" entryNumber="{{ index }}" entryId="{{ entry.id }}" link="{{ entry.link }}">
+        {% else %}
+            <div class="read entry" id="active" entryNumber="{{ index }}" entryId="{{ entry.id }}" link="{{ entry.link }}">
+        {% endif %}
     {% else %}
-        <div class="read entry">
+        {% if entry.unread %}
+            <div class="entry unread" entryNumber="{{ index }}" entryId="{{ entry.id }}" link="{{ entry.link }}">
+        {% else %}
+            <div class="read entry" entryNumber="{{ index }}" entryId="{{ entry.id }}" link="{{ entry.link }}">
+        {% endif %}
     {% endif %}
 
     <a href="{{ entry.link }}"><h3>{{ entry.title }}</h3></a>

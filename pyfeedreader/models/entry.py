@@ -17,7 +17,7 @@ class Entry(Model):
     remote_id = Column(String(1024))
 
     def __init__(self, feed_id=None, published=None, updated=None, title=None, content=None, description=None,
-                 link=None, remote_id=None,):
+                 link=None, remote_id=None, unread=True):
         self.feed_id = feed_id
         self.published = published
         self.updated = updated
@@ -26,3 +26,4 @@ class Entry(Model):
         self.description = description
         self.link = link
         self.remote_id = remote_id
+        self.unread = unread

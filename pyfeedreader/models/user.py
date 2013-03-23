@@ -8,6 +8,8 @@ from pyfeedreader.database import Model
 from sqlalchemy import Column, Integer, String, Text, desc
 from pyfeedreader.models.directory import Directory
 from pyfeedreader.models.userfeeds import UserFeeds
+from pyfeedreader.models.ReadEntries import ReadEntry
+
 
 class User(Model):
     __tablename__ = "user"
@@ -19,6 +21,7 @@ class User(Model):
     username = Column(String(100))
     dirs = relationship("Directory")
     feeds = relationship("UserFeeds")
+    read_ents = relationship("ReadEntry")
 
     def is_authenticated(self):
         return True
@@ -36,12 +39,20 @@ class User(Model):
         for dir in self.dirs:
             dir.get_feeds(session)
 
-    def feed_entities(self, session):
+    def feed_entities(self, session, last_login):
         ids = []
         for feed in self.feeds:
             ids.append(feed.feed_id)
 
         self.entries = session.query(Entry).filter(Entry.feed_id.in_(ids)).order_by(desc(Entry.updated)).all()
+
+        for entry in self.entries:
+            entry.unread = True
+            for read_ent in self.read_ents:
+                if entry.id == read_ent.entry_id:
+                    entry.unread = False
+
+
 
     def __repr__(self):
         return '<User %r>' % self.username

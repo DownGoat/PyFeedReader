@@ -43,13 +43,14 @@ def before_request():
 
 
 from pyfeedreader.database import db_session, fs_db_session
-from pyfeedreader.views import createaccount, login, mainpage, directory
+from pyfeedreader.views import createaccount, login, mainpage, directory, read
 
 #Register blueprints
 app.register_blueprint(createaccount.mod)
 app.register_blueprint(login.mod)
 app.register_blueprint(mainpage.mod)
 app.register_blueprint(directory.mod)
+app.register_blueprint(read.mod)
 
 if __name__ == '__main__':
     app.run(debug=True)

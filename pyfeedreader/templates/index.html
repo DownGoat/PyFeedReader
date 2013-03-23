@@ -4,6 +4,10 @@
     <title>Home</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../static/style/main.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+    </script>
+    <script src="../static/scripts/navigation.js"></script>
 </head>
 <body>
 <div id="banner">
@@ -26,7 +30,7 @@
 
     {% from "_entrycreater.html" import render_entry %}
     {% for entry in entries %}
-        {{ render_entry(entry) }}
+        {{ render_entry(entry, loop.index0) }}
     {% endfor %}
 
 

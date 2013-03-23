@@ -29,5 +29,6 @@ def init_db():
     from pyfeedreader.models.directory import Directory
     from pyfeedreader.models.direntries import DirEntry
     from pyfeedreader.models.userfeeds import UserFeeds
+    from pyfeedreader.models.ReadEntries import ReadEntry
 
     Model.metadata.create_all(bind=engine)
