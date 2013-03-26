@@ -20,4 +20,7 @@ mod = Blueprint('index', __name__)
 def index():
     current_user.feed_entities(fs_db_session, current_user.last_login)
     u = current_user
-    return render_template("index.html", entries=current_user.entries[:10], dirs=current_user.dirs)
+    return render_template("index.html",    entries=current_user.entries[:10],
+                                            dirs=current_user.dirs,
+                                            feeds=current_user.rfeed
+                            )

@@ -28,6 +28,7 @@ login_manager.login_view = "/login"
 def load_user(userid):
     u = User.query.get(int(userid))
     u.q_dirs(fs_db_session)
+    u.get_feeds(fs_db_session)
     return  u
 
 login_manager.setup_app(app)
@@ -43,7 +44,7 @@ def before_request():
 
 
 from pyfeedreader.database import db_session, fs_db_session
-from pyfeedreader.views import createaccount, login, mainpage, directory, read
+from pyfeedreader.views import createaccount, login, mainpage, directory, read, feed
 
 #Register blueprints
 app.register_blueprint(createaccount.mod)
@@ -51,6 +52,7 @@ app.register_blueprint(login.mod)
 app.register_blueprint(mainpage.mod)
 app.register_blueprint(directory.mod)
 app.register_blueprint(read.mod)
+app.register_blueprint(feed.mod)
 
 if __name__ == '__main__':
     app.run(debug=True)

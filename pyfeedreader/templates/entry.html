@@ -1,0 +1,4 @@
+{% from "_entrycreater.html" import render_entry %}
+{% for entry in entries %}
+    {{ render_entry(entry, loop.index0) }}
+{% endfor %}

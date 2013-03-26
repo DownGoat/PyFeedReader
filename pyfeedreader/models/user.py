@@ -23,6 +23,17 @@ class User(Model):
     feeds = relationship("UserFeeds")
     read_ents = relationship("ReadEntry")
 
+    def __init__(self, email=None, password=None, current_login=None, last_login=None, username=None,
+                 dirs=[], feeds=[], read_ents=[]):
+        self.email = email
+        self.password = password
+        self.current_login = current_login
+        self.last_login = last_login
+        self.username = username
+        self.dirs = dirs
+        self.feeds = feeds
+        self.read_ents = read_ents
+
     def is_authenticated(self):
         return True
 
@@ -39,10 +50,23 @@ class User(Model):
         for dir in self.dirs:
             dir.get_feeds(session)
 
+    def get_feeds(self, session):
+        temp_list = []
+        for uf in self.feeds:
+            f = session.query(Feed).filter(Feed.id == uf.feed_id).first()
+            if f:
+                temp_list.append(f)
+
+        self.rfeed = temp_list
+
     def feed_entities(self, session, last_login):
         ids = []
         for feed in self.feeds:
             ids.append(feed.feed_id)
+
+        for dir in self.dirs:
+            for dir_ent in dir.dir_entries:
+                ids.append(dir_ent.feed_id)
 
         self.entries = session.query(Entry).filter(Entry.feed_id.in_(ids)).order_by(desc(Entry.updated)).all()
 

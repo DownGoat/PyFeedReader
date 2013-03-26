@@ -25,6 +25,13 @@
     {% for dir in dirs %}
         {{ render_dir(dir) }}
     {% endfor %}
+
+    <ul class="feedlist">
+        {% from "_feedcreater.html" import render_feed %}
+        {% for feed in feeds %}
+            {{ render_feed(feed) }}
+        {% endfor %}
+    </ul>
 </div>
 <div id="contentcolumn">
 

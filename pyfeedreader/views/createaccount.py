@@ -18,24 +18,29 @@ mod = Blueprint('createaccount', __name__)
 @mod.route("/createaccount", methods=["POST"])
 def create_account():
     form = RegistrationForm(request.form)
+    error = None
 
     if not form.validate():
         return render_template('createaccount.html', form=form)
 
     result = User.query.filter(User.username == form.username.data).first()
     if result:
+        error = True
         form.username.errors = ["Username already in use."]
 
     result = User.query.filter(User.email == form.email.data).first()
     if result:
+        error = True
         form.email.errors = ["E-Mail already in use."]
 
-    if result:
+    if error:
         return render_template("createaccount.html", form=form)
 
     hash = bcrypt.hashpw(form.password.data, bcrypt.gensalt())
 
-    user = User(form.email.data, hash, None, time.time(), time.time(), form.username.data)
+    user = User(email=form.email.data, password=hash, current_login=time.time(),
+                last_login=time.time(), username=form.username.data)
+
     db_session.add(user)
     db_session.commit()
 

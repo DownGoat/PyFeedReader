@@ -23,7 +23,7 @@ mod = Blueprint('read', __name__)
 @login_required
 def read_entry():
     if not request.form.get("entry_id", None):
-        return redirect("/")
+        return jsonify(success=False)
 
     entry_id = request.form.get("entry_id", None)
 
@@ -31,4 +31,4 @@ def read_entry():
     db_session.add(read_entry)
     db_session.commit()
 
-    return redirect("/", code=200)
+    return jsonify(success=True)

@@ -1,0 +1,7 @@
+{% macro render_feed(feed) %}
+    {% if feed.new %}
+        <li class="new">{{ feed.title }} ({{ feed.new_entries }})</li>
+    {% else %}
+        <li>{{ feed.title }}</li>
+    {% endif %}
+{% endmacro %}

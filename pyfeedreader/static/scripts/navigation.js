@@ -25,6 +25,8 @@ function next() {
     var new_active = $("div[entryNumber='"+new_number+"']");
     if(new_active.length != 0) {
         $("#active").removeAttr("id");
+        new_active.removeClass("unread");
+        new_active.addClass("read");
         new_active.attr("id", "active");
         read(new_active);
     }
@@ -37,6 +39,8 @@ function previous() {
     var new_active = $("div[entryNumber='"+new_number+"']");
     if(new_active.length != 0) {
         $("#active").removeAttr("id");
+        new_active.removeClass("unread");
+        new_active.addClass("read");
         new_active.attr("id", "active");
         read(new_active);
     }
