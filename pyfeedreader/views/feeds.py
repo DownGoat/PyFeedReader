@@ -1,3 +1,6 @@
+from pyfeedreader.models.ReadEntries import ReadEntry
+from pyfeedreader.models.entry import Entry
+
 __author__ = 'sis13'
 
 from pyfeedreader.models.userfeeds import UserFeeds
@@ -109,18 +112,49 @@ def feeds_id(feed_id):
     elif request.method == "DELETE":
         return delete_feeds_id(feed_id)
 
+    abort(400)
+
 
 def get_feeds_id(feed_id):
-    pass
+    feed = db_session.query(Feed).filter(Feed.id == feed_id).first()
+
+    if not feed:
+        return jsonify(success=False, message="No feed with that ID.")
+
+    return jsonify(success=True, feed=Feed.json(feed))
 
 
 def post_feeds_id(feed_id):
-    pass
+    abort(400)
 
 
 def put_feeds_id(feed_id):
-    pass
+    feed = db_session.query(Feed).filter(Feed.id == feed_id).first()
+
+    if not feed:
+        return jsonify(success=False, message="No feed with that ID.")
+
+    entries = db_session.query(Entry).filter(Entry.feed_id == feed.id).all()
+
+    for entry in entries:
+        re = db_session.query(ReadEntry).filter(ReadEntry.user_id == current_user.id, ReadEntry.entry_id == entry.id)
+
+        if not re:
+            re = ReadEntry(entry.id, current_user.id)
+            db_session.add(re)
+
+    db_session.commit()
+
+    return jsonify(success=True)
 
 
 def delete_feeds_id(feed_id):
-    pass
+    feed = db_session.query(Feed).filter(Feed.id == feed_id).first()
+
+    if not feed:
+        return jsonify(success=False, message="No feed with that ID.")
+
+    db_session.delete( feed)
+    db_session.commit()
+
+    return jsonify(success=True, feed=Feed.json(feed))
