@@ -4,7 +4,7 @@
     <title>Home</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../static/style/main.css">
-
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
     </script>
     <script src="../static/scripts/navigation.js"></script>
@@ -20,6 +20,7 @@
     </ul>
 </div>
 <div id="menucolumn">
+    <button id="create-user">Create new user</button>
     <h4>Subscriptions</h4>
     {% from "_dircreater.html" import render_dir %}
     {% for dir in dirs %}
@@ -41,6 +42,17 @@
     {% endfor %}
 
 
+</div>
+
+<div id="dialog-form" title="Create new user">
+    <p class="validateTips">All form fields are required.</p>
+
+    <form>
+        <fieldset>
+            <label for="name">RSS</label>
+            <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
+        </fieldset>
+    </form>
 </div>
 </body>
 </html>

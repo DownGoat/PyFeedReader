@@ -1,7 +1,6 @@
 __author__ = 'sis13'
 
-from pyfeedreader import app
-from wtforms import Form, BooleanField, TextField, PasswordField, validators, IntegerField
+from wtforms import Form, TextField, validators, IntegerField
 
 
 class NewDirForm(Form):

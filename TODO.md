@@ -1,5 +1,4 @@
 Research Flask/SQLAlchemy migration tool for when creating new DB elements.
-Research Flask/SQLAlchemy migration tool for when creating new DB elements.
 Check sanitation with http://xenomachina.com/testbed.xml
 
 Planned API
@@ -23,9 +22,9 @@ Feeds
         <td>/feeds</td>
         <td>Create a new feed.</td>
         <td>Get all feeds for the logged in user.</td>
-        <td>Bulk update feeds.</td>
+        <td>Error.</td>
         <td>Delete all feeds for the user.</td>
-        <td>No work started.</td>
+        <td>Done.</td>
     </tr>
 
     <tr>
@@ -34,7 +33,7 @@ Feeds
         <td>Get the feed data for the specific feed.</td>
         <td>Update the feed</td>
         <td>Delete the feed.</td>
-        <td>No work started.</td>
+        <td>Tests written.</td>
     </tr>
 </table>
 

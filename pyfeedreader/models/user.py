@@ -6,9 +6,6 @@ __author__ = 'sis13'
 
 from pyfeedreader.database import Model
 from sqlalchemy import Column, Integer, String, Text, desc
-from pyfeedreader.models.directory import Directory
-from pyfeedreader.models.userfeeds import UserFeeds
-from pyfeedreader.models.ReadEntries import ReadEntry
 
 
 class User(Model):

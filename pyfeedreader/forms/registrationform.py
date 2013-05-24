@@ -1,6 +1,6 @@
 __author__ = 'sis13'
 
-from wtforms import Form, BooleanField, TextField, PasswordField, validators
+from wtforms import Form, TextField, PasswordField, validators
 
 
 class RegistrationForm(Form):

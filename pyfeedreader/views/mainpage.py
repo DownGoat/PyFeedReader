@@ -1,15 +1,9 @@
 __author__ = 'sis13'
 
 from flask import *
-import bcrypt
-import random
-import time
-from pyfeedreader import app
-from pyfeedreader.database import db_session, fs_db_session
-from pyfeedreader.models.user import User
 from flask.ext.login import *
-from pyfeedreader.models.entry import Entry
-from pyfeedreader.models.feed import Feed
+
+from pyfeedreader.database import fs_db_session
 
 
 mod = Blueprint('index', __name__)

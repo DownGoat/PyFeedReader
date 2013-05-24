@@ -4,8 +4,7 @@ from pyfeedreader.models.feed import Feed
 __author__ = 'sis13'
 
 from pyfeedreader.database import Model
-from sqlalchemy import Column, Integer, String, Text, ForeignKey
-from pyfeedreader.models.direntries import DirEntry
+from sqlalchemy import Column, Integer, String, ForeignKey
 
 
 class Directory(Model):

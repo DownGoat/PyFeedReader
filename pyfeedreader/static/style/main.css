@@ -113,3 +113,5 @@ html, body {
 .new {
     font-weight: bold;
 }
+
+fieldset { padding:0; border:0; margin-top:25px; }

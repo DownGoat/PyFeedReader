@@ -1,9 +1,8 @@
-from sqlalchemy.orm import relationship
-
 __author__ = 'sis13'
 
+from sqlalchemy import Column, Integer, ForeignKey
+
 from pyfeedreader.database import Model
-from sqlalchemy import Column, Integer, String, Text, ForeignKey
 
 
 class ReadEntry(Model):

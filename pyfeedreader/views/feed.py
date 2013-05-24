@@ -64,6 +64,7 @@ def add_feed():
         feed.subscribers = 1
         feed.last_checked = 1
 
+        # noinspection PyUnresolvedReferences,PyUnresolvedReferences
         db_session.add(feed)
         db_session.commit()
 
