@@ -27,3 +27,42 @@ class Entry(Model):
         self.link = link
         self.remote_id = remote_id
         self.unread = unread
+
+    @staticmethod
+    def json_entry(entry):
+        """
+        Turns the entry object into a JSON ready dict object.
+
+        :param entry: The entry you want to make JSON ready.
+
+        :return: The JSON ready dict.
+        """
+        return {
+            "entry_id": entry.id,
+            "feed_id": entry.feed_id,
+            "published": entry.published,
+            "updated": entry.updated,
+            "title": entry.title,
+            "content": entry.content,
+            "description": entry.description,
+            "link": entry.link,
+            "remote_id": entry.remote_id,
+        }
+
+    @staticmethod
+    def json_list(entries):
+        """
+        Turns a list of entries into JSON ready entries.
+
+        :param entries: The list of entries you want to turn into JSON ready dicts.
+
+        :return: List of JSON ready dicts.
+        """
+
+        json_ready = []
+        for entry in entries:
+            json_ready.append(
+                Entry.json_entry(entry)
+            )
+
+        return json_ready

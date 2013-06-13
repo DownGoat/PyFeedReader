@@ -106,7 +106,7 @@ def feeds_id(feed_id):
     if request.method == "GET":
         return get_feeds_id(feed_id)
     elif request.method == "POST":
-        return post_feeds_id(feed_id)
+        return post_feeds_id()
     elif request.method == "PUT":
         return put_feeds_id(feed_id)
     elif request.method == "DELETE":
@@ -124,7 +124,7 @@ def get_feeds_id(feed_id):
     return jsonify(success=True, feed=Feed.json(feed))
 
 
-def post_feeds_id(feed_id):
+def post_feeds_id():
     abort(400)
 
 
@@ -154,7 +154,7 @@ def delete_feeds_id(feed_id):
     if not feed:
         return jsonify(success=False, message="No feed with that ID.")
 
-    db_session.delete( feed)
+    db_session.delete(feed)
     db_session.commit()
 
     return jsonify(success=True, feed=Feed.json(feed))

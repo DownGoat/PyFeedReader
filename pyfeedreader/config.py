@@ -9,7 +9,7 @@ version = "0.01"
 #same configuration for both DB configs.
 feedserver_db = {
     "db_user": "root",
-    "db_pass": "123qwe",
+    "db_pass": "",
     "db_host": "localhost",
     "db_name": "gripper",
     "db_type": "mysql",
@@ -19,7 +19,7 @@ feedserver_db = {
 config = {
     # DB config
     "db_user": "root",
-    "db_pass": "123qwe",
+    "db_pass": "",
     "db_host": "localhost",
     "db_name": "gripper",
     "db_type": "mysql",

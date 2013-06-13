@@ -33,7 +33,7 @@ Feeds
         <td>Get the feed data for the specific feed.</td>
         <td>Update the feed</td>
         <td>Delete the feed.</td>
-        <td>Tests written.</td>
+        <td>Done.</td>
     </tr>
 </table>
 
@@ -82,7 +82,7 @@ Entries
         <td>Get all entries for the logged in user.</td>
         <td>Bulk update entries.</td>
         <td>Error.</td>
-        <td>No work started.</td>
+        <td>Finished.</td>
     </tr>
 
     <tr>

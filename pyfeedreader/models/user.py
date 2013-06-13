@@ -56,7 +56,7 @@ class User(Model):
 
         self.rfeed = temp_list
 
-    def feed_entities(self, session, last_login):
+    def feed_entities(self, session):
         ids = []
         for feed in self.feeds:
             ids.append(feed.feed_id)
@@ -73,7 +73,17 @@ class User(Model):
                 if entry.id == read_ent.entry_id:
                     entry.unread = False
 
+    def get_entries(self, session, offset, limit):
+        self.get_feeds(session)
 
+        ids = []
+        for feed in self.feeds:
+            ids.append(feed.feed_id)
+
+        query = session.query(Entry).filter(Entry.feed_id.in_(ids)).order_by(desc(Entry.updated)).limit(limit).offset(
+            offset)
+
+        return query.all()
 
     def __repr__(self):
         return '<User %r>' % self.username
