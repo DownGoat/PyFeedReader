@@ -91,7 +91,7 @@ Entries
         <td>Get all the entries for that feed.</td>
         <td>Bulk update the entries for that feed.</td>
         <td>Error.</td>
-        <td>No work started.</td>
+        <td>Tests written, and work started.</td>
     </tr>
 
     <tr>
