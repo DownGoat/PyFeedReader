@@ -2,7 +2,6 @@ __author__ = 'sis13'
 
 from flask import *
 from flask.ext.login import *
-
 from pyfeedreader.database import fs_db_session
 
 

@@ -1,12 +1,10 @@
+__author__ = 'sis13'
+
 from pyfeedreader.forms.directoryforms import NewDirForm, AddFeedDirForm
 from pyfeedreader.models.directory import Directory
 from pyfeedreader.models.direntries import DirEntry
 from pyfeedreader.models.userfeeds import UserFeeds
-
-__author__ = 'sis13'
-
 from flask import *
-
 from pyfeedreader.database import db_session
 from flask.ext.login import *
 

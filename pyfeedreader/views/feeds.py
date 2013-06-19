@@ -1,8 +1,7 @@
-from pyfeedreader.models.ReadEntries import ReadEntry
-from pyfeedreader.models.entry import Entry
-
 __author__ = 'sis13'
 
+from pyfeedreader.models.ReadEntries import ReadEntry
+from pyfeedreader.models.entry import Entry
 from pyfeedreader.models.userfeeds import UserFeeds
 from pyfeedreader.models.feed import Feed
 from flask import *

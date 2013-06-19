@@ -21,6 +21,60 @@ class EntriesTests(unittest.TestCase):
         print(rv.data)
         assert '"success": true' in rv.data and "http://link.com/page1" in rv.data
 
+    def test_entries_get_bad_limitoffset(self):
+        self.login(USERNAME, PASSWORD)
+        self.add_entry("http://link.com/page1", "http://link.com/page1")
+
+        rv = self.app.get("/entries")
+
+        print(rv.data)
+        assert "Invalid limit and or offset." in rv.data
+
+    def test_entries_get_bad_limitchar(self):
+        self.login(USERNAME, PASSWORD)
+        self.add_entry("http://link.com/page1", "http://link.com/page1")
+
+        rv = self.app.get("/entries?limit=a&offset=0")
+
+        print(rv.data)
+        assert "Invalid limit and or offset." in rv.data
+
+    def test_entries_get_bad_offsetchar(self):
+        self.login(USERNAME, PASSWORD)
+        self.add_entry("http://link.com/page1", "http://link.com/page1")
+
+        rv = self.app.get("/entries?limit=0&offset=a")
+
+        print(rv.data)
+        assert "Invalid limit and or offset." in rv.data
+
+    def test_entries_get_bad_limitnegative(self):
+        self.login(USERNAME, PASSWORD)
+        self.add_entry("http://link.com/page1", "http://link.com/page1")
+
+        rv = self.app.get("/entries?limit=-1&offset=0")
+
+        print(rv.data)
+        assert "Invalid limit and or offset." in rv.data
+
+    def test_entries_get_bad_offsetnegative(self):
+        self.login(USERNAME, PASSWORD)
+        self.add_entry("http://link.com/page1", "http://link.com/page1")
+
+        rv = self.app.get("/entries?limit=1&offset=-1")
+
+        print(rv.data)
+        assert "Invalid limit and or offset." in rv.data
+
+    def test_entries_get_bad_range(self):
+        self.login(USERNAME, PASSWORD)
+        self.add_entry("http://link.com/page1", "http://link.com/page1")
+
+        rv = self.app.get("/entries?limit=300&offset=0")
+
+        print(rv.data)
+        assert "Too big range." in rv.data
+
     def test_entries_get_none(self):
         self.login(USERNAME, PASSWORD)
 
@@ -132,16 +186,69 @@ class EntriesFeedIDTests(unittest.TestCase):
         self.login(USERNAME, PASSWORD)
         self.add_entry("http://link.com/page1", "http://link.com/page1")
 
-        rv = self.app.get("/entries/1")
+        rv = self.app.get("/entries/1?limit=5&offset=0")
 
         print(rv.data)
         assert "http://link.com/page1" in rv.data
+
+    def test_entry_feed_get_bad_limitoffset(self):
+        self.login(USERNAME, PASSWORD)
+        self.add_entry("http://link.com/page1", "http://link.com/page1")
+
+        rv = self.app.get("/entries/1")
+        print(rv.data)
+        assert "Invalid limit and or offset." in rv.data
+
+    def test_entry_feed_get_bad_limitchar(self):
+        self.login(USERNAME, PASSWORD)
+        self.add_entry("http://link.com/page1", "http://link.com/page1")
+
+        #Limit char
+        rv = self.app.get("/entries/1?limit=a&offset=0")
+        print(rv.data)
+        assert "Invalid limit and or offset." in rv.data
+
+    def test_entry_feed_get_bad_offsetchar(self):
+        self.login(USERNAME, PASSWORD)
+        self.add_entry("http://link.com/page1", "http://link.com/page1")
+
+        #Offset char
+        rv = self.app.get("/entries/1?limit=5&offset=a")
+        print(rv.data)
+        assert "Invalid limit and or offset." in rv.data
+
+    def test_entry_feed_get_bad_limitnegative(self):
+        self.login(USERNAME, PASSWORD)
+        self.add_entry("http://link.com/page1", "http://link.com/page1")
+
+        #Limit negative
+        rv = self.app.get("/entries/1?limit=-1&offset=0")
+        print(rv.data)
+        assert "Invalid limit and or offset." in rv.data
+
+    def test_entry_feed_get_bad_offsetnegative(self):
+        self.login(USERNAME, PASSWORD)
+        self.add_entry("http://link.com/page1", "http://link.com/page1")
+
+        #Offset negative
+        rv = self.app.get("/entries/1?limit=5&offset=-1")
+        print(rv.data)
+        assert "Invalid limit and or offset." in rv.data
+
+    def test_entry_feed_get_bad_range(self):
+        self.login(USERNAME, PASSWORD)
+        self.add_entry("http://link.com/page1", "http://link.com/page1")
+
+        #Range to long
+        rv = self.app.get("/entries/1?limit=300&offset=0")
+        print(rv.data)
+        assert "Too big range." in rv.data
 
     def test_entry_feed_get_none(self):
         self.login(USERNAME, PASSWORD)
         self.add_entry("http://link.com/page1", "http://link.com/page1")
 
-        rv = self.app.get("/entries/2")
+        rv = self.app.get("/entries/2?limit=1&offset=0")
 
         print(rv.data)
         assert '"results": []' in rv.data
@@ -150,7 +257,10 @@ class EntriesFeedIDTests(unittest.TestCase):
         self.login(USERNAME, PASSWORD)
         self.add_entry("http://link.com/page1", "http://link.com/page1")
 
-        assert 1 == 0
+        rv = self.app.put("/entries/1")
+
+        print(rv.data)
+        assert '"success": true' in rv.data
 
     def add_entry(self, link, remote_id):
         self.app.post("/feeds", data={

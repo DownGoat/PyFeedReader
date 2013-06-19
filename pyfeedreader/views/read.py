@@ -1,9 +1,7 @@
-from pyfeedreader.models.ReadEntries import ReadEntry
-
 __author__ = 'sis13'
 
 from flask import *
-
+from pyfeedreader.models.ReadEntries import ReadEntry
 from pyfeedreader.database import db_session
 from flask.ext.login import *
 

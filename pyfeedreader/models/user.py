@@ -1,11 +1,10 @@
-from sqlalchemy.orm import relationship
-from pyfeedreader.models.entry import Entry
-from pyfeedreader.models.feed import Feed
-
 __author__ = 'sis13'
 
 from pyfeedreader.database import Model
 from sqlalchemy import Column, Integer, String, Text, desc
+from sqlalchemy.orm import relationship
+from pyfeedreader.models.entry import Entry
+from pyfeedreader.models.feed import Feed
 
 
 class User(Model):

@@ -1,10 +1,9 @@
-from sqlalchemy.orm import relationship
-from pyfeedreader.models.feed import Feed
-
 __author__ = 'sis13'
 
 from pyfeedreader.database import Model
 from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
+from pyfeedreader.models.feed import Feed
 
 
 class Directory(Model):

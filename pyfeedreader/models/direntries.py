@@ -1,7 +1,6 @@
 __author__ = 'sis13'
 
 from sqlalchemy import Column, Integer, ForeignKey
-
 from pyfeedreader.database import Model
 
 

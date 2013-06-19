@@ -1,9 +1,8 @@
-import bcrypt
-from pyfeedreader import User
-
 __author__ = 'sis13'
 
 from wtforms import Form, BooleanField, TextField, PasswordField, validators
+import bcrypt
+from pyfeedreader import User
 
 
 class LoginForm(Form):

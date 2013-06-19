@@ -1,5 +1,3 @@
-from pyfeedreader.forms.registrationform import RegistrationForm
-
 __author__ = 'sis13'
 
 from flask import *
@@ -8,6 +6,7 @@ import time
 from pyfeedreader.database import db_session
 from pyfeedreader.models.user import User
 from flask.ext.login import *
+from pyfeedreader.forms.registrationform import RegistrationForm
 
 
 mod = Blueprint('createaccount', __name__)

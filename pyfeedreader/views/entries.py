@@ -1,13 +1,12 @@
-from sqlalchemy import desc
-from pyfeedreader.models.ReadEntries import ReadEntry
-from pyfeedreader.models.entry import Entry
-
 __author__ = 'sis13'
 
 from flask import *
 from pyfeedreader.database import db_session
 from flask.ext.login import *
 import json
+from sqlalchemy import desc
+from pyfeedreader.models.ReadEntries import ReadEntry
+from pyfeedreader.models.entry import Entry
 
 mod = Blueprint('entries', __name__)
 
@@ -33,8 +32,20 @@ def get_entries():
     all entries is too much data.
     :return:
     """
-    limit = request.args.get("limit")
-    offset = request.args.get("offset")
+    try:
+        limit = int(request.args.get("limit"))
+        offset = int(request.args.get("offset"))
+    except (ValueError, TypeError):
+        return jsonify(success=False, message="Invalid limit and or offset.")
+
+    if limit is None or offset is None:
+        return jsonify(success=False, message="Invalid limit and or offset.")
+
+    if limit < 0 or offset < 0:
+        return jsonify(success=False, message="Invalid limit and or offset.")
+
+    if limit > 200:
+        return jsonify(success=False, message="Too big range.")
 
     #Request needs a limit and offset, cannot return all data it is too much.
     if limit is None or offset is None:
@@ -106,11 +117,20 @@ def get_entries_feed(feed_id):
     :param feed_id: The ID of the feed.
     :return:
     """
-    limit = request.args.get("limit")
-    offset = request.args.get("offset")
+    try:
+        limit = int(request.args.get("limit"))
+        offset = int(request.args.get("offset"))
+    except (ValueError, TypeError):
+        return jsonify(success=False, message="Invalid limit and or offset.")
 
     if limit is None or offset is None:
         return jsonify(success=False, message="Invalid limit and or offset.")
+
+    if limit < 0 or offset < 0:
+        return jsonify(success=False, message="Invalid limit and or offset.")
+
+    if limit > 200:
+        return jsonify(success=False, message="Too big range.")
 
     query = db_session.query(Entry).filter(Entry.feed_id == feed_id).order_by(desc(Entry.updated)).limit(limit).offset(
         offset)
