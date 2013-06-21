@@ -1,4 +1,4 @@
-__author__ = 'sis13'
+__author__ = 'DownGoat'
 
 from pyfeedreader.models.directory import Directory
 from pyfeedreader.models.direntries import DirEntry

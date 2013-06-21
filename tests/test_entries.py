@@ -1,10 +1,9 @@
-import json
-from pyfeedreader.models.entry import Entry
-
 __author__ = 'sis13'
 
 import unittest
 import pyfeedreader
+import json
+from pyfeedreader.models.entry import Entry
 
 USERNAME = "downgoat"
 PASSWORD = "123qwe"
@@ -116,6 +115,8 @@ class EntriesTests(unittest.TestCase):
         print(rv.data)
 
         assert 'No Entry IDs given, and or invalid JSON.' in rv.data
+
+
 
     def add_entry(self, link, remote_id):
         self.app.post("/feeds", data={
@@ -253,14 +254,36 @@ class EntriesFeedIDTests(unittest.TestCase):
         print(rv.data)
         assert '"results": []' in rv.data
 
-    def test_entry_feed_put(self):
+    def test_entry_feed_put_mark_all_read(self):
         self.login(USERNAME, PASSWORD)
         self.add_entry("http://link.com/page1", "http://link.com/page1")
 
-        rv = self.app.put("/entries/1")
+        rv = self.app.put("/entries/1", data=json.dumps(
+            {"action": "mark_all_read"}
+        ))
 
         print(rv.data)
         assert '"success": true' in rv.data
+
+    def test_entry_feed_put_bad_json(self):
+        self.login(USERNAME, PASSWORD)
+        self.add_entry("http://link.com/page1", "http://link.com/page1")
+
+        rv = self.app.put("/entries/1", data="{'bad':'json")
+
+        print(rv.data)
+        assert 'Invalid JSON.' in rv.data
+
+    def test_entry_feed_put_unkown_action(self):
+        self.login(USERNAME, PASSWORD)
+        self.add_entry("http://link.com/page1", "http://link.com/page1")
+
+        rv = self.app.put("/entries/1", data=json.dumps(
+            {"action": "unknown"}
+        ))
+
+        print(rv.data)
+        assert "Unkown action." in rv.data
 
     def add_entry(self, link, remote_id):
         self.app.post("/feeds", data={
