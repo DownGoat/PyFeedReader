@@ -53,7 +53,7 @@ def get_entries():
 
     entries = current_user.get_entries(db_session, offset, limit)
 
-    return jsonify(success=True, results=Entry.json_list(entries))
+    return jsonify(success=True, results=Entry.json_list(entries, db_session, current_user.id))
 
 
 def post_entries():
@@ -135,12 +135,20 @@ def get_entries_feed(feed_id):
     query = db_session.query(Entry).filter(Entry.feed_id == feed_id).order_by(desc(Entry.updated)).limit(limit).offset(
         offset)
 
-    return jsonify(success=True, results=Entry.json_list(query.all()))
+    return jsonify(success=True, results=Entry.json_list(query.all(), db_session, current_user.id))
 
 
 def put_entries_feed(feed_id):
     """
-    A PUT request should bulk update entries for this feed and mark them read.
+    A PUT request should bulk update entries for this feed and mark them read or unread.
+    The request should include JSON data to specify which kind of update, below is a example
+    of a mark read request.
+    {
+        "action":"mark_read"
+    }
+
+    TODO implement mark all unread.
+
     :return:
     """
     try:

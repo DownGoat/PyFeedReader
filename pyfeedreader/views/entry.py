@@ -28,6 +28,13 @@ def entry():
 
 
 def get_entry():
+    """
+    The GET request should return the entry.
+    Below is a example of a GET request:
+        /entry?id=1
+
+    :return:
+    """
     try:
         entry_id = int(request.args.get("id"))
     except (ValueError, TypeError):
@@ -36,7 +43,7 @@ def get_entry():
     entry = db_session.query(Entry).filter(Entry.id == entry_id).first()
 
     if entry:
-        return jsonify(success=True, results=Entry.json_entry(entry))
+        return jsonify(success=True, results=Entry.json_entry(entry, db_session, current_user.id))
     else:
         return jsonify(success=False, message="No entry with ID {0}.".format(entry_id), link="")
 
@@ -46,6 +53,26 @@ def post_entry():
 
 
 def put_entry():
+    """
+    The PUT request should update the entry, it can either be marked as read or marked as unread.
+    What kind of update the request is should be specified in the action variable of the JSON data in the request.
+    A example of a mark read request is shown below:
+    {
+        "action":"mark_read",
+        "id":"1"
+    }
+
+    Action is the type of update that should be done to the entry.
+    ID is the ID of the entry to preform the update on.
+
+    Below is a example of a mark unread request:
+    {
+        "action":"mark_unread",
+        "id":"1"
+    }
+
+    :return:
+    """
     try:
         data = json.loads(request.data)
     except ValueError:  # Validate JSON
@@ -65,6 +92,7 @@ def put_entry():
     if entry is None:
         return jsonify(success=False, message="No entry with that ID.", link="")
 
+    # Handling a mark read request.
     if action == "mark_read":
         read_entries = db_session.query(ReadEntry).filter(ReadEntry.entry_id == current_user.id).all()
 
@@ -76,10 +104,12 @@ def put_entry():
 
         return jsonify(success=True)
 
+    # Handling a mark unread request.
     elif action == "mark_unread":
+        #Just in case there are several read entries for the entry remove them all.
         read_entries = db_session.query(ReadEntry).filter(ReadEntry.entry_id == current_user.id).all()
 
-        if read_entries is None:
+        if len(read_entries) == 0:
             return jsonify(success=False, message="Already marked as unread.", link="")
 
         for read_entry in read_entries:

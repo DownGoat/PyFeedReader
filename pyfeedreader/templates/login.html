@@ -4,29 +4,32 @@
     <title>Login</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../static/style/style.css">
+    <link rel="stylesheet" href="../static/style/login.css">
 </head>
 <body>
 
 <div id="banner">
-<p>Small banner here...</p>
+
 </div>
 <div id="welcome">
 <p>Happy Welcome message. <a href="/createaccount">Create Account</a></p>
 </div>
 <div id="logincontainer">
     <div class="centercontainer"><h1>Login</h1></div>
-    <div id="container">
 
         {% from "_formhelpers.html" import render_field %}
-        <form class="login" action="/login" method="post">
-            {{ render_field(form.username) }}
-            {{ render_field(form.password) }}
-            {{ render_field(form.remember_me) }}
+        <form id="login" action="/login" method="post">
+            <fieldset id="inputs">
+                <input id="username" type="text" placeholder="Username" autofocus required>
+                <input id="password" type="password" placeholder="Password" required>
+            </fieldset>
 
-            <p><input type="submit" name="submit" value="Login" class="registerb"/></p>
-            <a href="/forgotpassword">Forgot your password?</a>
+            <fieldset id="buttons">
+                <input type="submit" id="submit" value="Log in">
+                <a href="">Forgot your password?</a><a href="/register">Register</a>
+            </fieldset>
+
         </form>
-    </div>
 </div>
 
 </body>

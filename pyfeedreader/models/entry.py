@@ -1,6 +1,8 @@
+from pyfeedreader.models.ReadEntries import ReadEntry
+
 __author__ = 'sis13'
 
-from pyfeedreader.database import Model
+from pyfeedreader.database import Model, db_session
 from sqlalchemy import Column, Integer, String, Text
 
 
@@ -29,7 +31,7 @@ class Entry(Model):
         self.unread = unread
 
     @staticmethod
-    def json_entry(entry):
+    def json_entry(entry, db_session, user_id):
         """
         Turns the entry object into a JSON ready dict object.
 
@@ -37,6 +39,11 @@ class Entry(Model):
 
         :return: The JSON ready dict.
         """
+
+        read_entry = db_session.query(ReadEntry).filter(ReadEntry.entry_id == entry.id,
+                                                        ReadEntry.user_id == user_id).first()
+        unread = read_entry is None
+
         return {
             "entry_id": entry.id,
             "feed_id": entry.feed_id,
@@ -47,10 +54,11 @@ class Entry(Model):
             "description": entry.description,
             "link": entry.link,
             "remote_id": entry.remote_id,
+            "unread": unread,
         }
 
     @staticmethod
-    def json_list(entries):
+    def json_list(entries, db_session, user_id):
         """
         Turns a list of entries into JSON ready entries.
 
@@ -62,7 +70,7 @@ class Entry(Model):
         json_ready = []
         for entry in entries:
             json_ready.append(
-                Entry.json_entry(entry)
+                Entry.json_entry(entry, db_session, user_id)
             )
 
         return json_ready

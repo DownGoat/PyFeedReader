@@ -192,3 +192,7 @@ return a error.
 * PUT will update that specific feed.
 
 * DELETE will delete that feed. Should the feeds be removed as well?
+
+
+Other stuff
+===========
