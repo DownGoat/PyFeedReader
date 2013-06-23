@@ -6,6 +6,7 @@ from pyfeedreader import User
 
 
 class LoginForm(Form):
+    errors = None
     username = TextField('Username', [
         validators.Required("You must enter a username."),
     ])

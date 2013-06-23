@@ -8,6 +8,7 @@ from pyfeedreader import app
 
 mod = Blueprint('login', __name__)
 
+
 @mod.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm(request.form)
@@ -16,11 +17,13 @@ def login():
         return render_template("login.html", form=form)
 
     if not form.validate():
+        form.errors = True
         return render_template("login.html", form=form)
 
     user = form.valid_login(form, form.username.data, form.password.data)
     if not user:
-        form.username.errors = ["The login details provided are not correct."]
+        form.errors = True
+        form.error_messages = ["The login details provided are not correct."]
 
         return render_template("login.html", form=form)
 
@@ -28,6 +31,7 @@ def login():
     login_user(user)
 
     return redirect("/")
+
 
 #Cant't justify creating a file for just logging out when it is this short.
 @app.route("/logout")

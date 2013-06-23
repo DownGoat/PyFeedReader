@@ -12,23 +12,35 @@
 
 </div>
 <div id="welcome">
-<p>Happy Welcome message. <a href="/createaccount">Create Account</a></p>
+    <p>Happy welcome message <a href="/createaccount">Create Account</a></p>
 </div>
 <div id="logincontainer">
     <div class="centercontainer"><h1>Login</h1></div>
 
-        {% from "_formhelpers.html" import render_field %}
         <form id="login" action="/login" method="post">
+            {% if form.errors %}
+                <ul class="error_list">
+                    {% for error in form.error_messages %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+
+                    {% for error in form.username.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+
+                    {% for error in form.password.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
             <fieldset id="inputs">
-                <input id="username" type="text" placeholder="Username" autofocus required>
-                <input id="password" type="password" placeholder="Password" required>
+                <input name="username" id="username" type="text" placeholder="Username" autofocus required />
+                <input name="password" id="password" type="password" placeholder="Password" required />
             </fieldset>
 
-            <fieldset id="buttons">
-                <input type="submit" id="submit" value="Log in">
-                <a href="">Forgot your password?</a><a href="/register">Register</a>
-            </fieldset>
 
+            <input type="submit" name="submit" value="Login" class="button" />
+            <a href="">Forgot your password?</a><a href="/register">Register</a>
         </form>
 </div>
 

@@ -1,7 +1,8 @@
 #welcome {
     float: left;
     width: 30%;
-    height: 50%;
+    height: 300px;
+    border-right: 2px solid #ccc;
 }
 
 #logincontainer {
@@ -12,15 +13,11 @@
 #login {
     height: 240px;
     width: 400px;
-    margin: -150px 0 0 -230px;
     padding: 30px;
-    position: absolute;
-    top: 300px;
-    left: 50%;
 }
 
 #inputs input {
-    background: #f1f1f1 url(http://www.red-team-design.com/wp-content/uploads/2011/09/login-sprite.png) no-repeat;
+    background: #f1f1f1 url("/static/images/login-sprite.png") no-repeat;
     padding: 15px 15px 15px 30px;
     margin: 0 0 10px 0;
     width: 353px;
@@ -54,4 +51,25 @@ fieldset {
     border: 0;
     padding: 0;
     margin: 0;
+}
+
+.error_list {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #EE8888;
+    border: 1px solid #d97070;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0 1px 1px #e07878 inset, 0 1px 0 #d97070;
+    -webkit-box-shadow: 0 1px 1px #e07878 inset, 0 1px 0 #d97070;
+    box-shadow: 0 1px 1px #e07878 inset, 0 1px 0 #d97070;
+}
+
+#login  a {
+    color: #004a80;
+    float: right;
+    font-size: 14px;
+    text-decoration: underline;
+    padding-right: 15px;
 }
