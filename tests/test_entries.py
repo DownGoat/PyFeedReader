@@ -159,7 +159,7 @@ class EntriesTests(unittest.TestCase):
         return self.app.get("/logout", follow_redirects=True)
 
     def create_user(self):
-        rv = self.app.post("/createaccount", data={
+        rv = self.app.post("/register", data={
             "email": "sindre@downgoat.net",
             "username": "downgoat",
             "emailc": "sindre@downgoat.net",
@@ -326,7 +326,7 @@ class EntriesFeedIDTests(unittest.TestCase):
         return self.app.get("/logout", follow_redirects=True)
 
     def create_user(self):
-        rv = self.app.post("/createaccount", data={
+        rv = self.app.post("/register", data={
             "email": "sindre@downgoat.net",
             "username": "downgoat",
             "emailc": "sindre@downgoat.net",

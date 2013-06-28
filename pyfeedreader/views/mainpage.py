@@ -14,6 +14,6 @@ def index():
     current_user.feed_entities(fs_db_session)
     u = current_user
     return render_template("index.html",    entries=current_user.entries[:10],
-                                            dirs=current_user.dirs,
+                                            dirs=current_user.categories,
                                             feeds=current_user.rfeed
                             )

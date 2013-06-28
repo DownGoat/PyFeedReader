@@ -1,4 +1,4 @@
-__author__ = 'sis13'
+__author__ = 'DownGoat'
 
 import logging
 from datetime import date
@@ -14,7 +14,7 @@ feedserver_db = {
     "db_name": "gripper",
     "db_type": "mysql",
     "db_port": "3306",
-    }
+}
 
 config = {
     # DB config
@@ -25,20 +25,20 @@ config = {
     "db_type": "mysql",
     "db_port": "3306",
 
-    "version":      version,
-    "User-agent":   "pyfeedreader-v{0}".format(version),
+    "version": version,
+    "User-agent": "pyfeedreader-v{0}".format(version),
 
-    "log_app":      "pyfeedreader",
-    "log_file":     "pyfeedreader_{0}.log".format(date.today().isoformat()),
-    "log_level":    logging.DEBUG,
+    "log_app": "pyfeedreader",
+    "log_file": "pyfeedreader_{0}.log".format(date.today().isoformat()),
+    "log_level": logging.DEBUG,
     #"log_level":    logging.INFO,
 
     # Number of ReaderThread to start.
-    "reader_threads":   10,
+    "reader_threads": 10,
 
     # How often to look for updates in minutes
     "update_frequency": 1,
-    }
+}
 
 config["db_connector"] = "{0}://{1}:{2}@{3}:{4}/{5}".format(
     config.get("db_type"),

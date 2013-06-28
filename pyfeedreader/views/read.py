@@ -1,4 +1,4 @@
-__author__ = 'sis13'
+__author__ = 'DownGoat'
 
 from flask import *
 from pyfeedreader.models.ReadEntries import ReadEntry

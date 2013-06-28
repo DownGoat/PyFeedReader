@@ -1,7 +1,7 @@
 __author__ = 'DownGoat'
 
-from pyfeedreader.models.directory import Directory
-from pyfeedreader.models.direntries import DirEntry
+from pyfeedreader.models.category import Category
+from pyfeedreader.models.category_entry import CategoryEntry
 from pyfeedreader.models.userfeeds import UserFeeds
 import feedparser
 from urlparse import urlparse
@@ -18,6 +18,11 @@ mod = Blueprint('feed', __name__)
 @mod.route("/feed/new", methods=["POST"])
 @login_required
 def add_feed():
+    """
+
+    :return:
+    """
+    # TODO This should be JSON too for the sake of consistency.
     feed_url = request.form.get("feed").lower()
     if not feed_url.startswith("https://") and not feed_url.startswith("http://"):
         feed_url = "http://" + feed_url
@@ -71,15 +76,15 @@ def add_feed():
     #Add the feed as directory entry if a directory is set.
     #If a UserFeed is made aswell the feed will appear twice in the
     #feed column on the mainpage.
-    directory = request.form.get("directory", None)
-    if directory:
-        _dir = db_session.query(Directory).filter(Directory.name == directory).first()
-        if not _dir:
+    category = request.form.get("directory", None)
+    if category:
+        _cat = db_session.query(Category).filter(Category.name == category).first()
+        if not _cat:
             db_session.rollback()
             return jsonify(success=False, message="Invalid directory.")
 
-        de = DirEntry(dir_id=_dir.id, feed_id=feed.id)
-        db_session.add(de)
+        ce = CategoryEntry(_cat=_cat.id, feed_id=feed.id)
+        db_session.add(ce)
 
     #Must make user entry since no directory specified.
     else:

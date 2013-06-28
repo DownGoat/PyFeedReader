@@ -1,4 +1,4 @@
-__author__ = 'sis13'
+__author__ = 'DownGoat'
 
 from pyfeedreader.database import Model
 from sqlalchemy import Column, Integer, String, Text, desc
@@ -15,18 +15,18 @@ class User(Model):
     current_login = Column(Integer)
     last_login = Column(Integer)
     username = Column(String(100))
-    dirs = relationship("Directory")
+    categories = relationship("Category")
     feeds = relationship("UserFeeds")
-    read_ents = relationship("ReadEntry")
+    category_entries = relationship("UserFeeds")
 
     def __init__(self, email=None, password=None, current_login=None, last_login=None, username=None,
-                 dirs=[], feeds=[], read_ents=[]):
+                 categories=[], feeds=[], read_ents=[]):
         self.email = email
         self.password = password
         self.current_login = current_login
         self.last_login = last_login
         self.username = username
-        self.dirs = dirs
+        self.categories = categories
         self.feeds = feeds
         self.read_ents = read_ents
 
@@ -42,9 +42,15 @@ class User(Model):
     def get_id(self):
         return unicode(self.id)
 
-    def q_dirs(self, session):
-        for dir in self.dirs:
-            dir.get_feeds(session)
+    def q_categories(self, session):
+        """
+        Dont remember what this function is for
+        TODO fix this.
+        :param session:
+        :return:
+        """
+        for category in self.categories:
+            category.get_feeds(session)
 
     def get_feeds(self, session):
         temp_list = []
@@ -60,9 +66,9 @@ class User(Model):
         for feed in self.feeds:
             ids.append(feed.feed_id)
 
-        for dir in self.dirs:
-            for dir_ent in dir.dir_entries:
-                ids.append(dir_ent.feed_id)
+        for category in self.categories:
+            for category_entry in category.category_entries:
+                ids.append(category_entry.feed_id)
 
         self.entries = session.query(Entry).filter(Entry.feed_id.in_(ids)).order_by(desc(Entry.updated)).all()
 
@@ -85,4 +91,4 @@ class User(Model):
         return query.all()
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<user %r>' % self.username

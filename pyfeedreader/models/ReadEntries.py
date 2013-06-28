@@ -5,7 +5,7 @@ from pyfeedreader.database import Model
 
 
 class ReadEntry(Model):
-    __tablename__ = "ReadEntry"
+    __tablename__ = "read_entry"
     id = Column('id', Integer, primary_key=True)
     entry_id = Column(Integer)
     user_id = Column(Integer, ForeignKey('user.id'))

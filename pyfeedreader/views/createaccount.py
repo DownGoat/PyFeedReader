@@ -1,4 +1,4 @@
-__author__ = 'sis13'
+__author__ = 'DownGoat'
 
 from flask import *
 import bcrypt
@@ -12,7 +12,7 @@ from pyfeedreader.forms.registrationform import RegistrationForm
 mod = Blueprint('createaccount', __name__)
 
 
-@mod.route("/createaccount", methods=["POST"])
+@mod.route("/register", methods=["POST"])
 def create_account():
     form = RegistrationForm(request.form)
     error = None
@@ -47,7 +47,7 @@ def create_account():
     return redirect("/")
 
 
-@mod.route("/createaccount", methods=["GET"])
+@mod.route("/register", methods=["GET"])
 def display_ca_page():
     form = RegistrationForm(request.form)
     return render_template("createaccount.html", form=form)

@@ -184,7 +184,7 @@ class EntryTests(unittest.TestCase):
 
 
     def create_user(self):
-        rv = self.app.post("/createaccount", data={
+        rv = self.app.post("/register", data={
             "email": "sindre@downgoat.net",
             "username": "downgoat",
             "emailc": "sindre@downgoat.net",
